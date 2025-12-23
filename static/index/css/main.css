@@ -377,6 +377,31 @@ header .container .search_pat.active .search_recommend {
   border-radius: 24px;
   overflow: hidden;
 }
+.between_pat .between_main .walkthrough .walkthrough_box .swiper-wrapper{
+     position: relative !important;
+     width: 100% !important; 
+     height: 100% !important; 
+     z-index: 1 !important; 
+     display: flex !important; 
+     transition-property: transform !important; 
+     box-sizing: content-box !important; 
+     transition-duration: 0ms !important;
+    transform: translate3d(0px, 0px, 0px)!important;
+}
+
+.between_pat .between_main .walkthrough .walkthrough_box .swiper-wrapper .swiper-slide{
+flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition-property: transform
+}
+/* .between_pat .between_main .walkthrough .walkthrough_box .swiper-scrollbar .swiper-scrollbar-drag{
+  height: 100% ;
+    border-radius: 4px ;
+    background-color: #7a7a7a ;
+    cursor: pointer ;
+} */
 @media screen and (max-width: 800px) {
   .swiper_box .swiper-wrapper .swiper-slide {
     border-radius: 12px;
@@ -1700,6 +1725,9 @@ header .container .search_pat.active .search_recommend {
   border-radius: 4px;
   background-color: #7a7a7a;
   cursor: pointer;
+  width: 206.598px;
+    transform: translate3d(142.582px, 0px, 0px);
+    transition-duration: 0ms
 }
 .between_pat .between_main .walkthrough > a {
   width: 40px;
@@ -2411,3 +2439,5 @@ footer .container .r p {
   font-size: 12px;
   color: #666;
 } /*# sourceMappingURL=main.css.map */
+
+
