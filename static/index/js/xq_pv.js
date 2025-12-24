@@ -1,9 +1,9 @@
 $(function () {
     var isOverGoogleAdinfo = false;
-    $('#div-gpt-ad-1765196244329-0').on('mouseover', function () {
+    $('#div-gpt-ad-1766493462807-0').on('mouseover', function () {
         isOverGoogleAdinfo = true
     });
-    $('#div-gpt-ad-1765196244329-0').on('mouseout', function () {
+    $('#div-gpt-ad-1766493462807-0').on('mouseout', function () {
         isOverGoogleAdinfo = false
     });
 
