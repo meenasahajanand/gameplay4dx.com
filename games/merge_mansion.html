@@ -887,6 +887,47 @@
 <div id="search_mask">
     <div class="search_main"></div>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+    
+    // ===== Mobile Main Menu =====
+    const mobileBtn = document.querySelector(".mobile_memu_btn");
+    const topNav = document.querySelector("#nav_mask");
+    
+    if(mobileBtn && topNav){
+        mobileBtn.addEventListener("click", function(e){
+            e.preventDefault();
+            topNav.classList.toggle("active");
+            mobileBtn.classList.toggle("active");
+        });
+    }
+
+    // ===== Category Popup =====
+    const catBtn = document.querySelector(".sub_nav_trigger");
+    const catMenu = document.querySelector(".sub_nav");
+
+    if(catBtn && catMenu){
+        catBtn.addEventListener("click", function(e){
+            e.preventDefault(); // Ye important hai
+            catMenu.classList.toggle("active");
+            catBtn.classList.toggle("active");
+        });
+    }
+
+    // ===== Close menus on outside click =====
+    document.addEventListener("click", function(e){
+        if(!e.target.closest(".branch_nav") && !e.target.closest(".mobile_memu_btn")){
+            topNav?.classList.remove("active");
+            mobileBtn?.classList.remove("open");
+            catMenu?.classList.remove("active");
+            catBtn?.classList.remove("open");
+        }
+    });
+
+});
+</script>
+</div>
 <script src=".././fastclick.min.js"
         integrity="sha512-qH+R6YL4/40iiIrnN5aNZ1sEeEalNAdnzP9jfsxFPBdIslTkwUddkSazjVWhJ3f/3Y26QF6aql0xeneuVw0h/Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
