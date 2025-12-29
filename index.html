@@ -782,107 +782,160 @@ document.addEventListener("DOMContentLoaded", function(){
 </div>
 <script src="fastclick.min.js"></script>
 <script src="lodash.min.js"></script>
-<script src="swiper.min.js"></script>
+<script src="swiper.min.js" onload="window.swiperLoaded = true;" onerror="console.error('Swiper library failed to load');"></script>
 <script src="static/index/js/main.js"></script>
 
 
 <script>
     (function() {
-        var swiperInitialized = false;
+        var swiper1Initialized = false;
+        var swiper2Initialized = false;
+        var retryCount = 0;
+        var maxRetries = 50; // 5 seconds max wait time
         
         function initSwipers() {
-            if (swiperInitialized) return;
-            
-            if (typeof Swiper === 'undefined') {
-                console.warn('Swiper library not loaded yet, retrying...');
-                setTimeout(initSwipers, 100);
-                return;
+            // Check if Swiper library is loaded
+            if (typeof Swiper === 'undefined' || typeof window.Swiper === 'undefined') {
+                retryCount++;
+                if (retryCount < maxRetries) {
+                    setTimeout(initSwipers, 100);
+                    return;
+                } else {
+                    console.error('Swiper library failed to load after multiple attempts. Retry count: ' + retryCount);
+                    // Try one more time after longer delay
+                    if (retryCount === maxRetries) {
+                        setTimeout(function() {
+                            if (typeof Swiper !== 'undefined') {
+                                initSwipers();
+                            }
+                        }, 1000);
+                    }
+                    return;
+                }
             }
             
             let windows_width = window.innerWidth || window.screen.width;
             
             // Initialize Swiper for Editor's Picks
-            var swiperBox1 = document.querySelector('.swiper_box');
-            if (swiperBox1) {
-                try {
-                    var swiper1 = new Swiper('.swiper_box', {
-                        slidesPerView: 'auto',
-                        spaceBetween: 18,
-                        freeMode: false,
-                        resistance: true,
-                        resistanceRatio: 0.85,
-                        touchEventsTarget: 'container',
-                        simulateTouch: true,
-                        allowTouchMove: true,
-                        touchRatio: 1,
-                        touchAngle: 45,
-                        threshold: 5,
-                        longSwipes: true,
-                        longSwipesRatio: 0.5,
-                        longSwipesMs: 300,
-                        followFinger: true,
-                        grabCursor: true,
-                        preventClicks: true,
-                        preventClicksPropagation: true,
-                        touchStartPreventDefault: true,
-                        touchMoveStopPropagation: false,
-                        speed: 300
-                    });
-                    console.log('✓ Swiper 1 (Editor\'s Picks) initialized successfully');
-                    swiperInitialized = true;
-                } catch(e) {
-                    console.error('✗ Swiper 1 initialization error:', e);
+            if (!swiper1Initialized) {
+                var swiperBox1 = document.querySelector('.swiper_box');
+                if (swiperBox1) {
+                    try {
+                        // Check if already initialized
+                        if (swiperBox1.swiper) {
+                            swiper1Initialized = true;
+                            return;
+                        }
+                        
+                        var swiper1 = new Swiper('.swiper_box', {
+                            slidesPerView: 'auto',
+                            spaceBetween: 18,
+                            freeMode: false,
+                            resistance: true,
+                            resistanceRatio: 0.85,
+                            touchEventsTarget: 'container',
+                            simulateTouch: true,
+                            allowTouchMove: true,
+                            touchRatio: 1,
+                            touchAngle: 45,
+                            threshold: 5,
+                            longSwipes: true,
+                            longSwipesRatio: 0.5,
+                            longSwipesMs: 300,
+                            followFinger: true,
+                            grabCursor: true,
+                            preventClicks: true,
+                            preventClicksPropagation: true,
+                            touchStartPreventDefault: true,
+                            touchMoveStopPropagation: false,
+                            speed: 300,
+                            observer: true,
+                            observeParents: true
+                        });
+                        swiper1Initialized = true;
+                        console.log('✓ Swiper 1 (Editor\'s Picks) initialized successfully');
+                    } catch(e) {
+                        console.error('✗ Swiper 1 initialization error:', e);
+                    }
                 }
             }
             
             // Initialize Swiper for Hot Games
-            var swiperBox2 = document.querySelector('.swiper_box_2');
-            if (swiperBox2) {
-                try {
-                    var swiper2 = new Swiper('.swiper_box_2', {
-                        slidesPerView: 'auto',
-                        spaceBetween: windows_width > 1100 ? 0 : 15,
-                        freeMode: false,
-                        resistance: true,
-                        resistanceRatio: 0.85,
-                        touchEventsTarget: 'container',
-                        simulateTouch: true,
-                        allowTouchMove: true,
-                        touchRatio: 1,
-                        touchAngle: 45,
-                        threshold: 5,
-                        longSwipes: true,
-                        longSwipesRatio: 0.5,
-                        longSwipesMs: 300,
-                        followFinger: true,
-                        grabCursor: true,
-                        preventClicks: true,
-                        preventClicksPropagation: true,
-                        touchStartPreventDefault: true,
-                        touchMoveStopPropagation: false,
-                        speed: 300
-                    });
-                    console.log('✓ Swiper 2 (Hot Games) initialized successfully');
-                    swiperInitialized = true;
-                } catch(e) {
-                    console.error('✗ Swiper 2 initialization error:', e);
+            if (!swiper2Initialized) {
+                var swiperBox2 = document.querySelector('.swiper_box_2');
+                if (swiperBox2) {
+                    try {
+                        // Check if already initialized
+                        if (swiperBox2.swiper) {
+                            swiper2Initialized = true;
+                            return;
+                        }
+                        
+                        var swiper2 = new Swiper('.swiper_box_2', {
+                            slidesPerView: 'auto',
+                            spaceBetween: windows_width > 1100 ? 0 : 15,
+                            freeMode: false,
+                            resistance: true,
+                            resistanceRatio: 0.85,
+                            touchEventsTarget: 'container',
+                            simulateTouch: true,
+                            allowTouchMove: true,
+                            touchRatio: 1,
+                            touchAngle: 45,
+                            threshold: 5,
+                            longSwipes: true,
+                            longSwipesRatio: 0.5,
+                            longSwipesMs: 300,
+                            followFinger: true,
+                            grabCursor: true,
+                            preventClicks: true,
+                            preventClicksPropagation: true,
+                            touchStartPreventDefault: true,
+                            touchMoveStopPropagation: false,
+                            speed: 300,
+                            observer: true,
+                            observeParents: true
+                        });
+                        swiper2Initialized = true;
+                        console.log('✓ Swiper 2 (Hot Games) initialized successfully');
+                    } catch(e) {
+                        console.error('✗ Swiper 2 initialization error:', e);
+                    }
                 }
             }
         }
         
-        // Initialize when DOM and Swiper are ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
+        // Multiple initialization strategies for live deployment
+        function startInit() {
+            // Strategy 1: Wait for DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    setTimeout(initSwipers, 300);
+                });
+            } else {
+                setTimeout(initSwipers, 300);
+            }
+            
+            // Strategy 2: Wait for window load (all resources loaded)
+            window.addEventListener('load', function() {
                 setTimeout(initSwipers, 500);
             });
-        } else {
-            setTimeout(initSwipers, 500);
+            
+            // Strategy 3: Immediate check if everything is ready
+            if (document.readyState === 'complete') {
+                setTimeout(initSwipers, 1000);
+            }
         }
         
-        // Also try on window load as backup
-        window.addEventListener('load', function() {
-            setTimeout(initSwipers, 300);
-        });
+        // Start initialization
+        startInit();
+        
+        // Fallback: Try again after a longer delay (for slow networks)
+        setTimeout(function() {
+            if (!swiper1Initialized || !swiper2Initialized) {
+                initSwipers();
+            }
+        }, 2000);
     })();
 </script>
 </body>
