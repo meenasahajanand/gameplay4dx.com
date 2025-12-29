@@ -12,22 +12,13 @@
     <link rel="stylesheet" href="static/index/font/iconfont.css">
     <link rel="stylesheet" type="text/css"
           href="cookieconsent.min.css"/>
-    <link rel="stylesheet" href="layui.min.css"
-          integrity="sha512-o+g1fl6FWuY42UXwVvA8Dk9C8OoU/DKSJjKTpjh2QWu2OXIYZlRNC3lu7iaIsCxa9oSv6KSLmk4R4QH8ujP0DA=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link rel="stylesheet" href="swiper.min.css"
-          integrity="sha512-uCQmAoax6aJTxC03VlH0uCEtE0iLi83TW1Qh6VezEZ5Y17rTrIE+8irz4H4ehM7Fbfbm8rb30OkxVkuwhXxrRg=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="layui.min.css">
+    <link rel="stylesheet" href="swiper.min.css">
 
     <link rel="stylesheet" href="static/index/css/main.css">
     <script src="static/index/font/iconfont.js"></script>
     <script src="static/index/js/jquery.min.js"></script>
-    <script src="layui.all.min.js"
-            integrity="sha512-DydCfg0OjmdfkZyNIFcx2IpORrBIRWGnNg+2PgLGVHwchp6qCbr12MnrRlI73Gsf0zqvib8sWi7lTsAhY1Ywfw=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src=""
-            integrity="sha512-PYqZh14FSExDb67jbM60M4ri5A/Bn/xOiM1ihfPx7c1d8XywMmn2M7+Z4i+v9RF9dlzRYzqk7sXamAHKZjfyFA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="layui.all.min.js"></script>
    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" crossorigin="anonymous"></script>
   <script src="lazyload.min.js"></script>
    <script>
@@ -789,110 +780,109 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 </script>
 </div>
-<script src="fastclick.min.js"
-        integrity="sha512-qH+R6YL4/40iiIrnN5aNZ1sEeEalNAdnzP9jfsxFPBdIslTkwUddkSazjVWhJ3f/3Y26QF6aql0xeneuVw0h/Q=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="lodash.min.js"
-        integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="swiper.min.js"
-        integrity="sha512-VHsNaV1C4XbgKSc2O0rZDmkUOhMKPg/rIi8abX9qTaVDzVJnrDGHFnLnCnuPmZ3cNi1nQJm+fzJtBbZU9yRCww=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="fastclick.min.js"></script>
+<script src="lodash.min.js"></script>
+<script src="swiper.min.js"></script>
 <script src="static/index/js/main.js"></script>
 
 
 <script>
     (function() {
+        var swiperInitialized = false;
+        
         function initSwipers() {
+            if (swiperInitialized) return;
+            
+            if (typeof Swiper === 'undefined') {
+                console.warn('Swiper library not loaded yet, retrying...');
+                setTimeout(initSwipers, 100);
+                return;
+            }
+            
             let windows_width = window.innerWidth || window.screen.width;
             
             // Initialize Swiper for Editor's Picks
             var swiperBox1 = document.querySelector('.swiper_box');
-            if (swiperBox1 && typeof Swiper !== 'undefined') {
+            if (swiperBox1) {
                 try {
                     var swiper1 = new Swiper('.swiper_box', {
                         slidesPerView: 'auto',
-                        centerInsufficientSlides: true,
                         spaceBetween: 18,
+                        freeMode: false,
+                        resistance: true,
+                        resistanceRatio: 0.85,
                         touchEventsTarget: 'container',
                         simulateTouch: true,
                         allowTouchMove: true,
                         touchRatio: 1,
                         touchAngle: 45,
-                        grabCursor: true,
-                        touchStartPreventDefault: true,
-                        touchMoveStopPropagation: false,
-                        preventClicks: true,
-                        preventClicksPropagation: true,
-                        freeMode: false,
-                        resistance: true,
-                        resistanceRatio: 0.85,
                         threshold: 5,
                         longSwipes: true,
                         longSwipesRatio: 0.5,
                         longSwipesMs: 300,
                         followFinger: true,
-                        speed: 300,
-                        direction: 'horizontal'
+                        grabCursor: true,
+                        preventClicks: true,
+                        preventClicksPropagation: true,
+                        touchStartPreventDefault: true,
+                        touchMoveStopPropagation: false,
+                        speed: 300
                     });
-                    console.log('Swiper 1 initialized');
+                    console.log('✓ Swiper 1 (Editor\'s Picks) initialized successfully');
+                    swiperInitialized = true;
                 } catch(e) {
-                    console.error('Swiper 1 error:', e);
+                    console.error('✗ Swiper 1 initialization error:', e);
                 }
             }
             
             // Initialize Swiper for Hot Games
             var swiperBox2 = document.querySelector('.swiper_box_2');
-            if (swiperBox2 && typeof Swiper !== 'undefined') {
+            if (swiperBox2) {
                 try {
                     var swiper2 = new Swiper('.swiper_box_2', {
                         slidesPerView: 'auto',
-                        centerInsufficientSlides: true,
                         spaceBetween: windows_width > 1100 ? 0 : 15,
+                        freeMode: false,
+                        resistance: true,
+                        resistanceRatio: 0.85,
                         touchEventsTarget: 'container',
                         simulateTouch: true,
                         allowTouchMove: true,
                         touchRatio: 1,
                         touchAngle: 45,
-                        grabCursor: true,
-                        touchStartPreventDefault: true,
-                        touchMoveStopPropagation: false,
-                        preventClicks: true,
-                        preventClicksPropagation: true,
-                        freeMode: false,
-                        resistance: true,
-                        resistanceRatio: 0.85,
                         threshold: 5,
                         longSwipes: true,
                         longSwipesRatio: 0.5,
                         longSwipesMs: 300,
                         followFinger: true,
-                        speed: 300,
-                        direction: 'horizontal'
+                        grabCursor: true,
+                        preventClicks: true,
+                        preventClicksPropagation: true,
+                        touchStartPreventDefault: true,
+                        touchMoveStopPropagation: false,
+                        speed: 300
                     });
-                    console.log('Swiper 2 initialized');
+                    console.log('✓ Swiper 2 (Hot Games) initialized successfully');
+                    swiperInitialized = true;
                 } catch(e) {
-                    console.error('Swiper 2 error:', e);
+                    console.error('✗ Swiper 2 initialization error:', e);
                 }
             }
         }
         
-        // Wait for Swiper library and DOM to be ready
-        function waitForSwiper() {
-            if (typeof Swiper !== 'undefined') {
-                if (document.readyState === 'loading') {
-                    document.addEventListener('DOMContentLoaded', function() {
-                        setTimeout(initSwipers, 200);
-                    });
-                } else {
-                    setTimeout(initSwipers, 200);
-                }
-            } else {
-                setTimeout(waitForSwiper, 50);
-            }
+        // Initialize when DOM and Swiper are ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(initSwipers, 500);
+            });
+        } else {
+            setTimeout(initSwipers, 500);
         }
         
-        waitForSwiper();
+        // Also try on window load as backup
+        window.addEventListener('load', function() {
+            setTimeout(initSwipers, 300);
+        });
     })();
 </script>
 </body>

@@ -2,12 +2,16 @@
 window.addEventListener('load', function() {
     try {
         var fastClick = new FastClick(document.body);
-        // Exclude swiper containers from FastClick
-        if (fastClick && typeof fastClick.needsClick === 'function') {
-            var swiperSelectors = '.swiper_box, .swiper_box_2, .swiper-wrapper, .swiper-slide';
+        // Exclude swiper containers from FastClick to allow touch scrolling
+        if (fastClick) {
+            var swiperSelectors = '.swiper_box, .swiper_box_2';
             document.addEventListener('touchstart', function(e) {
-                if (e.target.closest(swiperSelectors)) {
-                    fastClick.needsClick(e.target);
+                var target = e.target;
+                if (target.closest && target.closest(swiperSelectors)) {
+                    if (fastClick.needsClick) {
+                        fastClick.needsClick(target);
+                    }
+                    e.stopPropagation();
                 }
             }, true);
         }

@@ -380,31 +380,23 @@ header .container .search_pat.active .search_recommend {
   display: flex;
   transition-property: transform;
   box-sizing: content-box;
-  touch-action: pan-x pan-y;
-}
-.swiper_box .swiper-slide {
-  flex-shrink: 0;
-  width: auto;
-  height: 100%;
-  position: relative;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  -webkit-user-select: none;
-}
-.swiper_box .swiper-slide a {
-  display: block;
-  width: 100%;
-  height: 100%;
-  touch-action: manipulation;
-  pointer-events: auto;
 }
 .swiper_box .swiper-wrapper .swiper-slide {
+  flex-shrink: 0;
   width: calc((100% - 54px) / 4);
   min-width: 230px;
   position: relative;
   border-radius: 24px;
   overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.swiper_box .swiper-wrapper .swiper-slide a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
 }
 .between_pat .between_main .walkthrough .walkthrough_box .swiper-wrapper{
      position: relative !important;
@@ -565,26 +557,9 @@ flex-shrink: 0;
   display: flex;
   transition-property: transform;
   box-sizing: content-box;
-  touch-action: pan-x pan-y;
-}
-.swiper_box_2 .swiper-slide {
-  flex-shrink: 0;
-  width: auto;
-  height: 100%;
-  position: relative;
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  -webkit-user-select: none;
-}
-.swiper_box_2 .swiper-slide a {
-  display: block;
-  width: 100%;
-  height: 100%;
-  touch-action: manipulation;
-  pointer-events: auto;
 }
 .swiper_box_2 .swiper-wrapper .swiper-slide {
+  flex-shrink: 0;
   width: 25%;
   min-width: 230px;
   overflow: hidden;
@@ -592,6 +567,16 @@ flex-shrink: 0;
   background-color: rgba(0, 0, 0, 0);
   transition: all 0.3s;
   border-radius: 10px;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.swiper_box_2 .swiper-wrapper .swiper-slide a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
 }
 .swiper_box_2 .swiper-wrapper .swiper-slide > .thum {
   width: 100%;
