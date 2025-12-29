@@ -4,16 +4,17 @@ window.addEventListener('load', function() {
         var fastClick = new FastClick(document.body);
         // Exclude swiper containers from FastClick to allow touch scrolling
         if (fastClick) {
-            var swiperSelectors = '.swiper_box, .swiper_box_2';
+            var swiperSelectors = '.swiper_box, .swiper_box_2, .swiper-wrapper, .swiper-slide';
             document.addEventListener('touchstart', function(e) {
                 var target = e.target;
-                if (target.closest && target.closest(swiperSelectors)) {
-                    if (fastClick.needsClick) {
+                var swiperElement = target.closest && target.closest(swiperSelectors);
+                if (swiperElement) {
+                    if (fastClick.needsClick && typeof fastClick.needsClick === 'function') {
                         fastClick.needsClick(target);
                     }
-                    e.stopPropagation();
+                    // Don't stop propagation, let Swiper handle it
                 }
-            }, true);
+            }, false);
         }
     } catch(e) {
         console.log('FastClick initialization error:', e);
