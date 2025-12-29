@@ -1,6 +1,19 @@
-// fastclick
+// fastclick - exclude swiper containers to allow touch scrolling
 window.addEventListener('load', function() {
-    new FastClick(document.body);
+    try {
+        var fastClick = new FastClick(document.body);
+        // Exclude swiper containers from FastClick
+        if (fastClick && typeof fastClick.needsClick === 'function') {
+            var swiperSelectors = '.swiper_box, .swiper_box_2, .swiper-wrapper, .swiper-slide';
+            document.addEventListener('touchstart', function(e) {
+                if (e.target.closest(swiperSelectors)) {
+                    fastClick.needsClick(e.target);
+                }
+            }, true);
+        }
+    } catch(e) {
+        console.log('FastClick initialization error:', e);
+    }
 }, false);
 //图片懒加载
 let lazyImg = document.querySelectorAll('.lazy');

@@ -270,16 +270,7 @@
         <a href="more/1.html">More ></a>
     </div>
     <div class="swiper_box">
-       <div class="swiper-wrapper"
-     style="
-        position: relative;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        display: flex;
-        transition-property: transform;
-        box-sizing: content-box;
-     ">
+       <div class="swiper-wrapper">
                         <a class="swiper-slide" href="games/roblox.html">
                 <div class="thum"><img src="uploads/attach/2023/03/20230302/1ddce9503ab56e68c088cb4bcd2d1fd5.png"
                      alt=""></div>
@@ -506,16 +497,7 @@
         <a href="more/3.html">More ></a>
     </div>
     <div class="swiper_box_2">
-       <div class="swiper-wrapper"
-     style="
-        position: relative;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        display: flex;
-        transition-property: transform;
-        box-sizing: content-box;
-     ">
+       <div class="swiper-wrapper">
                         <a class="swiper-slide" href="games/papas_freezeria_to_go.html">
                 <div class="thum"><img src="uploads/attach/2023/03/20230310/752b6ba424b7f69559750b44eb8796b7.png" alt=""></div>
                 <div class="buttom">
@@ -820,17 +802,98 @@ document.addEventListener("DOMContentLoaded", function(){
 
 
 <script>
-    let windows_width = window.screen.width;
-    new Swiper('.swiper_box', {
-        slidesPerView: 'auto',
-        centerInsufficientSlides: true,
-        spaceBetween: 18
-    });
-    new Swiper('.swiper_box_2', {
-        slidesPerView: 'auto',
-        centerInsufficientSlides: true,
-        spaceBetween: windows_width > 1100 ? 0 : 15
-    });
+    (function() {
+        function initSwipers() {
+            let windows_width = window.innerWidth || window.screen.width;
+            
+            // Initialize Swiper for Editor's Picks
+            var swiperBox1 = document.querySelector('.swiper_box');
+            if (swiperBox1 && typeof Swiper !== 'undefined') {
+                try {
+                    var swiper1 = new Swiper('.swiper_box', {
+                        slidesPerView: 'auto',
+                        centerInsufficientSlides: true,
+                        spaceBetween: 18,
+                        touchEventsTarget: 'container',
+                        simulateTouch: true,
+                        allowTouchMove: true,
+                        touchRatio: 1,
+                        touchAngle: 45,
+                        grabCursor: true,
+                        touchStartPreventDefault: true,
+                        touchMoveStopPropagation: false,
+                        preventClicks: true,
+                        preventClicksPropagation: true,
+                        freeMode: false,
+                        resistance: true,
+                        resistanceRatio: 0.85,
+                        threshold: 5,
+                        longSwipes: true,
+                        longSwipesRatio: 0.5,
+                        longSwipesMs: 300,
+                        followFinger: true,
+                        speed: 300,
+                        direction: 'horizontal'
+                    });
+                    console.log('Swiper 1 initialized');
+                } catch(e) {
+                    console.error('Swiper 1 error:', e);
+                }
+            }
+            
+            // Initialize Swiper for Hot Games
+            var swiperBox2 = document.querySelector('.swiper_box_2');
+            if (swiperBox2 && typeof Swiper !== 'undefined') {
+                try {
+                    var swiper2 = new Swiper('.swiper_box_2', {
+                        slidesPerView: 'auto',
+                        centerInsufficientSlides: true,
+                        spaceBetween: windows_width > 1100 ? 0 : 15,
+                        touchEventsTarget: 'container',
+                        simulateTouch: true,
+                        allowTouchMove: true,
+                        touchRatio: 1,
+                        touchAngle: 45,
+                        grabCursor: true,
+                        touchStartPreventDefault: true,
+                        touchMoveStopPropagation: false,
+                        preventClicks: true,
+                        preventClicksPropagation: true,
+                        freeMode: false,
+                        resistance: true,
+                        resistanceRatio: 0.85,
+                        threshold: 5,
+                        longSwipes: true,
+                        longSwipesRatio: 0.5,
+                        longSwipesMs: 300,
+                        followFinger: true,
+                        speed: 300,
+                        direction: 'horizontal'
+                    });
+                    console.log('Swiper 2 initialized');
+                } catch(e) {
+                    console.error('Swiper 2 error:', e);
+                }
+            }
+        }
+        
+        // Wait for Swiper library and DOM to be ready
+        function waitForSwiper() {
+            if (typeof Swiper !== 'undefined') {
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', function() {
+                        setTimeout(initSwipers, 200);
+                    });
+                } else {
+                    setTimeout(initSwipers, 200);
+                }
+            } else {
+                setTimeout(waitForSwiper, 50);
+            }
+        }
+        
+        waitForSwiper();
+    })();
 </script>
 </body>
 
