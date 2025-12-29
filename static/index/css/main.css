@@ -1183,6 +1183,8 @@ flex-shrink: 0;
   justify-content: center;
   flex-direction: column;
   background: rgba(0, 0, 0, 0.5);
+  pointer-events: auto;
+  touch-action: manipulation;
 }
 .between_pat .between_main .iframe_box .action .thum {
   width: 140px;
@@ -1209,12 +1211,30 @@ flex-shrink: 0;
   justify-content: center;
   background-clip: content-box;
   color: #fff;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3);
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  text-decoration: none;
 }
 .between_pat .between_main .iframe_box .action a .iconfont {
   margin-right: 5px;
 }
+.between_pat .between_main .iframe_box .action a:active {
+  opacity: 0.8;
+  transform: scale(0.95);
+}
 .between_pat .between_main .iframe_box.active .mask_thum,
 .between_pat .between_main .iframe_box.active .action {
+  display: none;
+}
+.between_pat .between_main .iframe_box.active #iframe_ {
+  z-index: 10;
+  display: block;
+}
+.between_pat .between_main .iframe_box.active .mobile_tag {
   display: none;
 }
 @media screen and (max-width: 800px) {

@@ -1,18 +1,21 @@
-// fastclick - exclude swiper containers to allow touch scrolling
+// fastclick - exclude swiper containers and play buttons to allow touch scrolling and clicks
 window.addEventListener('load', function() {
     try {
         var fastClick = new FastClick(document.body);
-        // Exclude swiper containers from FastClick to allow touch scrolling
+        // Exclude swiper containers and play buttons from FastClick
         if (fastClick) {
-            var swiperSelectors = '.swiper_box, .swiper_box_2, .swiper-wrapper, .swiper-slide';
+            var excludeSelectors = '.swiper_box, .swiper_box_2, .swiper-wrapper, .swiper-slide, .iframe_box .action, .iframe_box .action a';
             document.addEventListener('touchstart', function(e) {
                 var target = e.target;
-                var swiperElement = target.closest && target.closest(swiperSelectors);
-                if (swiperElement) {
+                var excludeElement = target.closest && target.closest(excludeSelectors);
+                if (excludeElement) {
                     if (fastClick.needsClick && typeof fastClick.needsClick === 'function') {
                         fastClick.needsClick(target);
                     }
-                    // Don't stop propagation, let Swiper handle it
+                    // Don't stop propagation for swiper, but allow play button to work
+                    if (excludeElement.closest('.iframe_box .action')) {
+                        // Allow play button to handle its own events
+                    }
                 }
             }, false);
         }
@@ -85,3 +88,90 @@ window.addEventListener("click",(e)=>{
         search_mask.classList.remove('active');
     }
 });
+
+// Define full_iframe function for mobile fullscreen
+function full_iframe() {
+    var iframeBox = document.querySelector('.iframe_box');
+    if (iframeBox) {
+        iframeBox.classList.add('active');
+    }
+}
+
+// Fix play button for mobile touch events - run immediately and on DOM ready
+(function() {
+    function initPlayButtons() {
+        // Handle play button clicks in iframe_box
+        var playButtons = document.querySelectorAll('.iframe_box .action a');
+        playButtons.forEach(function(btn) {
+            // Skip if already processed
+            if (btn.dataset.playHandlerAdded === 'true') {
+                return;
+            }
+            
+            // Remove inline javascript and add proper event listener
+            if (btn.href && (btn.href.indexOf('javascript:') === 0 || btn.href.indexOf('classList.add') !== -1)) {
+                btn.href = 'javascript:void(0);';
+                btn.dataset.playHandlerAdded = 'true';
+                
+                // Add click and touch event listeners
+                function handlePlayClick(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    var iframeBox = btn.closest('.iframe_box');
+                    if (iframeBox) {
+                        iframeBox.classList.add('active');
+                    }
+                    return false;
+                }
+                
+                // Use capture phase to ensure it fires before other handlers
+                btn.addEventListener('click', handlePlayClick, true);
+                btn.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handlePlayClick(e);
+                }, true);
+            }
+        });
+        
+        // Handle mobile_tag and full_play buttons
+        var mobileTagButtons = document.querySelectorAll('.mobile_tag, .full_play');
+        mobileTagButtons.forEach(function(btn) {
+            // Skip if already processed
+            if (btn.dataset.fullIframeHandlerAdded === 'true') {
+                return;
+            }
+            
+            if (btn.href && btn.href.indexOf('javascript:full_iframe') !== -1) {
+                btn.href = 'javascript:void(0);';
+                btn.dataset.fullIframeHandlerAdded = 'true';
+                
+                function handleFullIframe(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    full_iframe();
+                    return false;
+                }
+                
+                btn.addEventListener('click', handleFullIframe, true);
+                btn.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleFullIframe(e);
+                }, true);
+            }
+        });
+    }
+    
+    // Run immediately if DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPlayButtons);
+    } else {
+        initPlayButtons();
+    }
+    
+    // Also run on window load as backup
+    window.addEventListener('load', function() {
+        setTimeout(initPlayButtons, 100);
+    });
+})();
