@@ -29,17 +29,55 @@
   });
 });
 </script>
-    <script>
-        window.googletag = window.googletag || {cmd: []};
-        googletag.cmd.push(function () {
-            var slot = googletag.defineOutOfPageSlot('/23330730517/gameplay4dx.com_inter', googletag.enums.OutOfPageFormat.INTERSTITIAL);
-            // Slot returns null if the page or device does not support interstitials
-            if (slot) slot.addService(googletag.pubads());
-            googletag.enableServices();
-            // Consider delaying until first div on page
-            googletag.display(slot);
-        });
-    </script>
+       <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" crossorigin="anonymous"></script>
+<script>
+  window.googletag = window.googletag || { cmd: [] };
+  let interstitialSlot;
+
+  googletag.cmd.push(() => {
+    // ✅ Define interstitial slot
+    interstitialSlot = googletag.defineOutOfPageSlot(
+      '/23330730517/gameplay4dx.com_inter',
+      googletag.enums.OutOfPageFormat.INTERSTITIAL
+    );
+
+    if (interstitialSlot) {
+      interstitialSlot.addService(googletag.pubads());
+    }
+
+    googletag.enableServices();
+
+    // ✅ Preload the interstitial ad immediately after page load
+    if (interstitialSlot) {
+      googletag.display(interstitialSlot);
+    }
+  });
+
+  // ✅ Function to show interstitial and then call callback
+  function showInterstitialAd(callback) {
+    googletag.cmd.push(() => {
+      if (interstitialSlot) {
+        googletag.pubads().display(interstitialSlot);
+      }
+      // ⏳ Fast fallback: max wait 500ms
+      setTimeout(() => {
+        if (typeof callback === 'function') callback();
+      }, 500);
+    });
+  }
+</script>
+
+
+    <style>
+      #link {
+        display: none;
+      }
+
+      div.content {
+        position: fixed;
+        top: 50%;
+      }
+    </style>
 
 
     <!-- Google tag (gtag.js) -->
