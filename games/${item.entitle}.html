@@ -252,5 +252,49 @@ document.addEventListener("DOMContentLoaded", function(){
         integrity="sha512-VHsNaV1C4XbgKSc2O0rZDmkUOhMKPg/rIi8abX9qTaVDzVJnrDGHFnLnCnuPmZ3cNi1nQJm+fzJtBbZU9yRCww=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="/static/index/js/main.js"></script>
+ <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const adIds = [
+                'div-gpt-ad-1766493462807-0', // D1
+                'div-gpt-ad-1766493519466-0', // D2
+                'div-gpt-ad-1766493571865-0'  // D3
+            ];
+
+            let isOverAd = false;
+
+            adIds.forEach(function (id) {
+                const adEl = document.getElementById(id);
+                if (!adEl) return;
+
+                adEl.addEventListener('mouseenter', function () {
+                    isOverAd = true;
+                });
+
+                adEl.addEventListener('mouseleave', function () {
+                    isOverAd = false;
+                });
+            });
+
+            window.addEventListener('blur', function () {
+                if (isOverAd) {
+                    window.dataLayer = window.dataLayer || [];
+                    dataLayer.push({
+                        event: 'detail_ck'
+                    });
+                }
+            });
+
+        });
+    </script>
+             <script>
+        googletag.cmd.push(function () {
+            googletag.display('div-gpt-ad-1766493462807-0');
+            googletag.display('div-gpt-ad-1766493519466-0');
+            googletag.display('div-gpt-ad-1766493571865-0');
+        });
+    </script>
+    </script>
+</script>
 </body>
 </html>

@@ -93,10 +93,87 @@
                 console.log(e);
             }                                                                      }
     </script> 
-<noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PTR27822"
-            height="0" width="0" style="display:none;visibility:hidden"></iframe>
-</noscript>
+ <!-- Google GPT -->
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" crossorigin="anonymous"></script>
+
+    <script>
+        window.googletag = window.googletag || { cmd: [] };
+
+        googletag.cmd.push(function () {
+
+            /* Responsive Size Mapping */
+            var mapping = googletag.sizeMapping()
+                .addSize([1024, 0], [[970, 250], [970, 90], [728, 90]])
+                .addSize([768, 0], [[728, 90], [300, 250]])
+                .addSize([0, 0], [[300, 250], [320, 480]])
+                .build();
+
+            function defineAd(path, id) {
+                googletag.defineSlot(
+                    path,
+                    [[970, 250], [970, 90], [728, 90], [300, 250], [320, 480]],
+                    id
+                ).defineSizeMapping(mapping)
+                    .addService(googletag.pubads());
+            }
+
+            /* Ad Slots */
+            defineAd('/23330730517/gameplay4dx.com_d1', 'div-gpt-ad-1766493462807-0');
+            defineAd('/23330730517/gameplay4dx.com_d2', 'div-gpt-ad-1766493519466-0');
+            defineAd('/23330730517/gameplay4dx.com_d3', 'div-gpt-ad-1766493571865-0');
+
+            /* Lazy Load */
+            googletag.pubads().enableLazyLoad({
+                fetchMarginPercent: 400,
+                renderMarginPercent: 200,
+                mobileScaling: 2
+            });
+
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+
+    <style>
+        /* ================= ADS CSS ================= */
+
+        .ad_box {
+            width: 100% !important;
+            text-align: center;
+            margin: 18px auto;
+        }
+
+        /* AD CONTAINER */
+        .ad-slot {
+            width: 100% !important;
+            margin: 0 auto;
+            min-height: 250px;
+            /* REQUIRED for lazy load */
+        }
+
+        /* Desktop */
+        @media (min-width:1024px) {
+            .ad-slot {
+                min-height: 90px;
+            }
+        }
+
+        /* Tablet */
+        @media (min-width:768px) and (max-width:1023px) {
+            .ad-slot {
+                min-height: 90px;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width:767px) {
+            .ad-slot {
+                min-height: 250px;
+            }
+        }
+    </style>
+
+
 <!-- End Google Tag Manager (noscript) -->
 <script src="../../cdn.jsdelivr.net/npm/cookieconsent%403/build/cookieconsent.min.js" data-cfasync="false"></script>
 <script>
@@ -267,31 +344,10 @@
     threshold: 300
   });
 });
-</script>            <script>
-                window.googletag = window.googletag || {cmd: []};
-                googletag.cmd.push(function () {
-                    var responsiveAdSlot = googletag.defineSlot('/23330730517/gameplay4dx.com_d1', [[300, 250], [336, 280], [728, 90], [750, 250], [780, 250], [970, 90], [970, 250]], 'div-gpt-ad-1766493462807-0').addService(googletag.pubads());
-                    var mapping =
-                        googletag.sizeMapping()
-                            .addSize([1380, 20], [[970, 90], [970, 250]])
-                            .addSize([1110, 20], [[780, 250]])
-                            .addSize([1070, 20], [[750, 250]])
-                            .addSize([1050, 20], [[728, 90]])
-                            .addSize([20, 20], [[300, 250], [336, 280]])
-                            .addSize([0, 0], [])
-                            .build();
-                    responsiveAdSlot.defineSizeMapping(mapping);
-                    googletag.pubads().collapseEmptyDivs();
-                    googletag.enableServices();
-                });
-            </script>
-            <!-- /23330730517/gameplay4dx.com_d1 -->
-            <div id='div-gpt-ad-1766493462807-0' style='min-width: 300px; min-height: 250px;'>
-                <script>
-                    googletag.cmd.push(function () {
-                        googletag.display('div-gpt-ad-1766493462807-0');
-                    });
-                </script>
+</script>        <!-- div 1  -->
+            <div class="ad_box">
+                <div id="div-gpt-ad-1766493462807-0" class="ad-slot"></div>
+                <p>Advertisement</p>
             </div>
         </div>
         <ul class="info_detail">
@@ -411,31 +467,10 @@
     threshold: 300
   });
 });
-</script>            <script>
-                window.googletag = window.googletag || {cmd: []};
-                googletag.cmd.push(function () {
-                    var responsiveAdSlot = googletag.defineSlot('/23330730517/gameplay4dx.com_d2', [[300, 250], [336, 280], [728, 90], [750, 250], [780, 250], [970, 90], [970, 250]], 'div-gpt-ad-1766493519466-0').addService(googletag.pubads());
-                    var mapping =
-                        googletag.sizeMapping()
-                            .addSize([1380, 20], [[970, 90], [970, 250]])
-                            .addSize([1110, 20], [[780, 250]])
-                            .addSize([1070, 20], [[750, 250]])
-                            .addSize([1050, 20], [[728, 90]])
-                            .addSize([20, 20], [[300, 250], [336, 280]])
-                            .addSize([0, 0], [])
-                            .build();
-                    responsiveAdSlot.defineSizeMapping(mapping);
-                    googletag.pubads().collapseEmptyDivs();
-                    googletag.enableServices();
-                });
-            </script>
-            <!-- /23330730517/gameplay4dx.com_d2 -->
-            <div id='div-gpt-ad-1766493519466-0' style='min-width: 300px; min-height: 250px;'>
-                <script>
-                    googletag.cmd.push(function () {
-                        googletag.display('div-gpt-ad-1766493519466-0');
-                    });
-                </script>
+</script>             <!-- div 2  -->
+            <div class="ad_box">
+                <div id="div-gpt-ad-1766493519466-0" class="ad-slot"></div>
+                <p>Advertisement</p>
             </div>
         </div>
         <div class="walkthrough">
@@ -680,32 +715,10 @@
     threshold: 300
   });
 });
-</script>            <script>
-                window.googletag = window.googletag || {cmd: []};
-                googletag.cmd.push(function () {
-                    var responsiveAdSlot = googletag.defineSlot('/23330730517/gameplay4dx.com_d3', [[300, 250], [336, 280], [728, 90], [750, 250], [780, 250], [970, 90], [970, 250]], 'div-gpt-ad-1766493571865-0').addService(googletag.pubads());
-                    var mapping =
-                        googletag.sizeMapping()
-                            .addSize([900, 20], [[300, 250], [336, 280]])
-                            .addSize([810, 20], [[780, 250]])
-                            .addSize([780, 20], [[750, 250]])
-                            .addSize([760, 20], [[728, 90]])
-                            .addSize([20, 20], [[300, 250], [336, 280]])
-                            .addSize([0, 0], [])
-                            .build();
-                    responsiveAdSlot.defineSizeMapping(mapping);
-
-                    googletag.pubads().collapseEmptyDivs();
-                    googletag.enableServices();
-                });
-            </script>
-            <!-- /23330730517/gameplay4dx.com_d3 -->
-            <div id='div-gpt-ad-1766493571865-0' style='min-width: 300px; min-height: 250px;'>
-                <script>
-                    googletag.cmd.push(function () {
-                        googletag.display('div-gpt-ad-1766493571865-0');
-                    });
-                </script>
+</script>              <!-- div 3 -->
+            <div class="ad_box">
+                <div id="div-gpt-ad-1766493571865-0" class="ad-slot"></div>
+                <p>Advertisement</p>
             </div>
         </div>
         <div class="aside_pat">
@@ -943,6 +956,50 @@ document.addEventListener("DOMContentLoaded", function(){
             el.parentElement.parentElement.classList.remove('hide_toogle');
         }
     }
+</script>
+ <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const adIds = [
+                'div-gpt-ad-1766493462807-0', // D1
+                'div-gpt-ad-1766493519466-0', // D2
+                'div-gpt-ad-1766493571865-0'  // D3
+            ];
+
+            let isOverAd = false;
+
+            adIds.forEach(function (id) {
+                const adEl = document.getElementById(id);
+                if (!adEl) return;
+
+                adEl.addEventListener('mouseenter', function () {
+                    isOverAd = true;
+                });
+
+                adEl.addEventListener('mouseleave', function () {
+                    isOverAd = false;
+                });
+            });
+
+            window.addEventListener('blur', function () {
+                if (isOverAd) {
+                    window.dataLayer = window.dataLayer || [];
+                    dataLayer.push({
+                        event: 'detail_ck'
+                    });
+                }
+            });
+
+        });
+    </script>
+             <script>
+        googletag.cmd.push(function () {
+            googletag.display('div-gpt-ad-1766493462807-0');
+            googletag.display('div-gpt-ad-1766493519466-0');
+            googletag.display('div-gpt-ad-1766493571865-0');
+        });
+    </script>
+    </script>
 </script>
 </body>
 
